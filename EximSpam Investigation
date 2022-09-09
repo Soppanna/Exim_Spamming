@@ -17,3 +17,24 @@ To Spamming Through PHP scripts
 =======================
 grep cwd /var/log/exim_mainlog | grep -v /var/spool | awk -F"cwd=" '{print $2}' | awk '{print $1}' | sort | uniq -c | sort -n
 =======================
+To check Emails present in exim mails queue/ Shorting the mails
+=======================
+exim -bpr|grep "<"|awk {'print $4'}|cut -d"<" -f2|cut -d">" -f1|sort -n|uniq -c|sort -n
+=======================
+Give top mail account list ==> Login and authenticated from server
+=========================
+exigrep @ /var/log/exim_mainlog | grep _login | sed -n 's/.*_login:\(.*\)S=.*/\1/p' | sort | uniq -c | sort -nr -k1
+=========================
+Give user name for bulk mails ==> Scripts
+==========================
+grep cwd=\/home\/ /var/log/exim_mainlog| cut -d' ' -f3 | sort -n | uniq -c| sort -n
+==========================
+Location where PHP scripts initiat
+==========================
+cd /var/spool/exim/input/
+grep "X-PHP-Script" * -R
+============================
+Check Which mail account is which is authenticated n server with hostmachine IP
+============================
+grep "<= " /var/log/exim_mainlog|grep -v "<= <>"|awk '{print $5,$7}'|cut -d":" -f1|sort|uniq -c|sort -n|tail
+=============================
