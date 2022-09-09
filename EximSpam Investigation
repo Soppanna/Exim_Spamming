@@ -1,0 +1,19 @@
+Flag used In Exim MTA
+========
+<=	Indicates the arrival of a message to Exim for handling
+=>	Shows a normal message delivery
+->	Additional address for the same delivery, i.e. an Email forwarder.
+>>	cutthrough is a router precondition
+        This option requests delivery be attempted while the item is being received. It is usable in the RCPT ACL and valid only for single-recipient mails forwarded from one SMTP connection to another. If a recipient-verify callout connection is requested in the same ACL it is held open and used for the data, otherwise one is made after the ACL completes.
+*>	delivery suppressed by -N
+**	delivery failed; address bounced
+==	delivery deferred; temporary problem
+<>	For "<>" from the exim manual; Additionally, you will often find A bounce message is shown with the sender address “<>”, and if it is locally generated, this is followed by an item of the form
+R=<message id>
+========
+----------------------------------
+ 
+To Spamming Through PHP scripts 
+=======================
+grep cwd /var/log/exim_mainlog | grep -v /var/spool | awk -F"cwd=" '{print $2}' | awk '{print $1}' | sort | uniq -c | sort -n
+=======================
